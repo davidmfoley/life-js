@@ -28,7 +28,9 @@ function LifeGame(width, height) {
   };
 
   LifeGame.prototype.evolve = function() {
-    this.aliveCells = {};
+    var nextGeneration = {};
+
+    this.aliveCells = nextGeneration;
   };
 
   LifeGame.prototype.isAlive = function(x, y) {
@@ -44,7 +46,6 @@ function LifeGame(width, height) {
       }
     }
   };
-
 })();
 
 
