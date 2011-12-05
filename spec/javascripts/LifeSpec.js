@@ -1,9 +1,8 @@
-
 describe("Life", function() {
   var game;
 
   beforeEach(function() {
-    game = new LifeGame();
+    game = new LifeGame(10, 10);
   });
 
   var boardContents = function(w,h){
@@ -22,9 +21,11 @@ describe("Life", function() {
     beforeEach(function() {
       game.makeAlive(0,0);
     });
+
     it ('is initially alive', function() {
       expect(game.isAlive(0,0)).toBe(true);
     });
+
     it ('dies after evolving', function() {
       game.evolve();
       expect(game.isAlive(0,0)).toBe(false);
@@ -51,10 +52,10 @@ describe("Life", function() {
     });
 
     function shouldBeADiamond() {
-      expect(boardContents(3,3)).toBe(
+      expect(boardContents(3,3)).toEqual([
         [0,1,0],
         [1,0,1],
-        [0,1,0]);
+        [0,1,0]]);
     }
   });
 
@@ -67,20 +68,19 @@ describe("Life", function() {
 
     it ('alternates orientations on first generation', function() {
       game.evolve();
-      expect(boardContents(3,3)).toBe(
+      expect(boardContents(3,3)).toEqual([
         [0,0,0],
         [1,1,1],
-        [0,0,0]);
+        [0,0,0]]);
     });
 
     it ('alternates back to original setup on second generation', function() {
       game.evolve();
       game.evolve();
-      expect(boardContents(3,3)).toBe(
+      expect(boardContents(3,3)).toEqual([
         [0,1,0],
         [0,1,0],
-        [0,1,0]);
+        [0,1,0]]);
     });
   });
-
 });
