@@ -38,10 +38,12 @@ describe("Life", function() {
       game.makeAlive(1,2);
       game.makeAlive(2,1);
     });
+
     it ('is static after one generation', function() {
       game.evolve();
       shouldBeADiamond();
     });
+
     it ('is static after two generations', function() {
       game.evolve();
       game.evolve();
@@ -62,6 +64,7 @@ describe("Life", function() {
       game.makeAlive(1,1);
       game.makeAlive(1,2);
     });
+
     it ('alternates orientations on first generation', function() {
       game.evolve();
       expect(boardContents(3,3)).toBe(
@@ -69,9 +72,14 @@ describe("Life", function() {
         [1,1,1],
         [0,0,0]);
     });
+
     it ('alternates back to original setup on second generation', function() {
       game.evolve();
       game.evolve();
+      expect(boardContents(3,3)).toBe(
+        [0,1,0],
+        [0,1,0],
+        [0,1,0]);
     });
   });
 
