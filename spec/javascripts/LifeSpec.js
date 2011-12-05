@@ -13,5 +13,9 @@ describe("Life", function() {
     it ('is initially alive', function() {
       expect(game.isAlive(0,0)).toBe(true);
     });
+    it ('dies after evolving', function() {
+      game.evolve();
+      expect(game.isAlive(0,0)).toBe(false);
+    });
   });
 });
