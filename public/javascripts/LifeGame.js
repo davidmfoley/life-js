@@ -6,15 +6,15 @@ function LifeGame(width, height) {
 
 (function() {
   var states = [
-    // index 0 = on touch, 1 = on evolve
-    // 0 == dead & 0 neighbors
-    // 5 == alive & 0 neighbors
+    // [on touch, on evolve]
+    // 0-4 == dead
     [1,0],
     [2,0],
     [3,0],
     [4,5],
     [4,0],
 
+    // 5-9 == alive
     [6,0],
     [7,0],
     [8,5],
@@ -27,22 +27,31 @@ function LifeGame(width, height) {
   };
 
   LifeGame.prototype.evolve = function() {
+    this.eachCell(this.touchNeighbors);
+
     var nextGeneration = {};
 
-    for (var cell in this.cells) {
-      var neighbors = this.getNeighbors(cell);
-      for (var i =0; i < neighbors.length; i++) {
-        this.touch(neighbors[i]);
-      }
-    }
-
-    for (var cell in this.cells) {
+    this.eachCell(function(cell) {
       var state = states[this.cells[cell]][1];
       if (state) {
         nextGeneration[cell] = state;
       }
-    }
+    });
+
     this.cells = nextGeneration;
+  };
+
+  LifeGame.prototype.eachCell = function(fn) {
+    for (var cell in this.cells) {
+      fn.call(this, cell);
+    }
+  };
+
+  LifeGame.prototype.touchNeighbors = function(cell) {
+      var neighbors = this.getNeighbors(cell);
+      for (var i =0; i < neighbors.length; i++) {
+        this.touch(neighbors[i]);
+      }
   };
 
   LifeGame.prototype.getNeighbors = function(xy) {
@@ -50,7 +59,6 @@ function LifeGame(width, height) {
     var x = parseInt(pieces[0], 10);
     var y = parseInt(pieces[1], 10);
     return this.neighborFinder.findNeighbors(x,y);
-
   };
 
   LifeGame.prototype.touch = function(xy) {
