@@ -14,6 +14,7 @@ function LifeGame(width, height) {
     [3,0],
     [4,5],
     [4,0],
+
     [6,0],
     [7,0],
     [8,5],
@@ -61,7 +62,4 @@ function LifeGame(width, height) {
     return (this.cells[[x,y]] || 0) > 4;
   };
 })();
-
-
-
 
