@@ -1,0 +1,7 @@
+Basic implementation of Conway's Game of Life in javascript.
+
+Uses ruby & the jasmine gem to proide a test framework.
+install bundler, bundle install and then:
+
+`rake jasmine`
+and visit http://localhost:8888
